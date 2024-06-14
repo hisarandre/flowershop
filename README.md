@@ -21,22 +21,9 @@ To launch the app, you can run it locally.
 0. First, clone this repository
 
 Launch the database :
-1. Make sure that you have PostGreSQL installed
-2. Register a new Server :
+1. Make sure that you have PostGreSQL database running
+2. Create a .env in the ressources folder and add `DATABASE_URL=` with the url to your db, username and paswword  
 
-- HostName : localhost
-- Port : 5432
-
-3. Create a new user :
-- Define the name and the password
-- In the privileges tab, turn on: can login, create databases and inherit rights from the parent roles
-- Create a new database and set the owner with the user you created
-- Create the tables with the file : back/src/main.resources/schema.sql
-- Insert data with the file : back/src/main.resources/data.sql
-- Grant access to each table to the user with a query :`GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE your_name_table TO your_user`;
-
-4. Open the config/application.properties file in your Spring Boot project.
-5. Complete the configuration with user password
 
 Launch the backend :
 1. Make sure you have the required versions of Java and dependencies installed.
