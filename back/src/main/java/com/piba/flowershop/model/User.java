@@ -1,5 +1,7 @@
 package com.piba.flowershop.model;
 
+import com.piba.flowershop.common.UserRole;
+import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 import jakarta.persistence.*;
 import org.hibernate.annotations.UuidGenerator;
@@ -13,36 +15,41 @@ import java.util.UUID;
 
 
 @Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name="app_user")
 public class User implements UserDetails {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.UUID)
     @UuidGenerator
     private UUID id;
 
     @Column(name = "last_name")
+    @NotBlank(message = "Last name cannot be blank")
     private String lastName;
 
     @Column(name = "first_name")
+    @NotBlank(message = "First name cannot be blank")
     private String firstName;
 
-    @Column(name = "gender")
+    @NotBlank(message = "Gender cannot be blank")
     private String gender;
 
-    @Column(name = "email")
+    @NotBlank(message = "Email cannot be blank")
     private String email;
 
-    @Column(name = "password")
+    @NotBlank(message = "Password cannot be blank")
     private String password;
 
-    @Column(name = "role")
-    private String role;
+    @Enumerated(EnumType.STRING)
+    private UserRole role;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority(role));
+        return List.of(new SimpleGrantedAuthority(role.name()));
     }
 
     @Override
